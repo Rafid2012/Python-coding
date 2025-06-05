@@ -1,0 +1,1 @@
+print("My name is Rafid. I'm 12 years. I'm read in grade 6. i live in Dhaka. My father's nme is Mahmudul Hasan. My mothers name is Rifat Akther. They both are doctor. My schools name is South Point School & College. I really love to code. it is my hobby ")
