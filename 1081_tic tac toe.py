@@ -2,15 +2,15 @@ import random
 
 def board_print(board):
     for row in board:
-        print("|".join(row))
+        print(" | ".join(row))
         print("-"*9)
 
-def winner(board,player):
+def winner(board, player):
     for i in range(3):
-        if all(board[i][j]==player for j in range(3) or all (board[j][i]==player for j in range(3))):
+        if all(board[i][j] == player for j in range(3)) or all(board[j][i] == player for j in range(3)):
             return True
-    if all(board[i][i]==player for i in range(3) or all(board[i][2-i]==player for i in range(3))):
-        return True
+        if all(board[i][i] == player for i in range(3)) or all(board[i][2 - i] == player for i in range(3)):
+            return True
     return False
 
 def full_board(board):
@@ -20,23 +20,23 @@ def computer_move(board):
     for i in range(3):
         for j in range(3):
             if board[i][j] == " ":
-               board[i][j] = "o"
-               if winner(board,'o'):
-                   board[i][j]== " "
+                board[i][j] = "O"
+                if winner(board,'O'):
+                   board[i][j]= " "
                    return (i,j)
-            board[i][j]
+                board[i][j] = " "
 
     for i in range(3):
         for j in range (3):
             if board[i][j] == " ":
-                board[i][j]=="x"
-            if winner(board,"x"):
+                board[i][j]="X"
+            if winner(board,"X"):
                 board[i][j]==" "
                 return (i,j)
-            board[i][j]
+            board[i][j] = " "
 
-    empty = [(i,j) for i in range (3) for j in range(3) == " "]
-    return random.choise(empty) if empty else None
+    empty = [(i,j) for i in range (3) for j in range(3) if board[i][j] == " "]
+    return random.choice(empty) if empty else None
 
 def ttt():
     print("----TICK TACK TOE----")
@@ -49,14 +49,14 @@ def ttt():
     while True:
         board_print(board)
         if current_player == 0:
-            print("Player{players[current player]}'s turn")
+            print(f"Player {players[current_player]}'s turn")
         try:
-         row_input = (input("enter the row or q to quit"))
+         row_input = (input("enter the row or q to quit: "))
          if row_input.lower() == "q":
              print("Thanks for playing")
              break
          
-         collum_input = (input("enter the collum or q to quit"))
+         collum_input = (input("enter the collum or q to quit: "))
          if collum_input.lower() == "q":
              print("Thanks for playing")
              break
@@ -66,7 +66,7 @@ def ttt():
          if row < 0 or row > 2 or collum < 0 or collum > 2:
              print("invalid input")
              continue
-         if board[row,collum] != " ":
+         if board[row][collum] != " ":
              print("The cell is full.")
              continue
          
@@ -74,7 +74,7 @@ def ttt():
             print("Invalid input")
 
         else:
-          print("computer move(O):")
+          print("computer move(O): ")
         move = computer_move(board)
         if move:
                 row,collum = move
@@ -83,7 +83,7 @@ def ttt():
         else:
             print("No move left for computer")
 
-        board[row,collum] = players[current_player]
+        board[row][collum] = players[current_player]
 
         if winner(board,players[current_player]):
             board_print(board)
@@ -93,7 +93,7 @@ def ttt():
                 print("computer (O) won!")
             break 
     
-        if is_full(board):
+        if full_board(board):
             board_print(board)
             print("It is a draw")
             break
