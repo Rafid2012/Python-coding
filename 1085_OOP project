@@ -1,0 +1,10 @@
+class a:
+    def __init__(self,name,age):
+      self.n = name
+      self.g = age
+
+    def info(self):
+        print(f"The name of the boy is {self.n} and its age is{self.g} ")
+
+r = a("Rahman", 12)
+r.info()
