@@ -35,7 +35,7 @@ class account:
         if not self.transaction:
             print("No transaction history available for this account.")
             for txn in self.transaction:
-                print(f"{txn["date"]} | {txn["time"]} | {txn["type"]} | {txn["ammount"]} TAKA | Balance : {txn["Balance"]} TAKA")
+                print(f"{txn['date']} | {txn['time']} | {txn['type']} | {txn['ammount']} TAKA | Balance : {txn['Balance']} TAKA")
 
     def _add_transaction(self,txn_type,ammount):
         txn = {
@@ -49,7 +49,7 @@ class account:
 
     def to_record(self):
         txn_data = ";".join(
-            [f"{t['date']} , {t["type"]} , {t["ammount"]} , {t["Balance"]}" for t in self.transaction]
+            [f"{t['date']} , {t['type']} , {t['ammount']} , {t['Balance']}" for t in self.transaction]
         )
         return f"{self.account_number} | {self.holder_name} | {self.balance} | {txn_data} "
     
@@ -72,7 +72,7 @@ class account:
                    account.transaction.appenend({
                        "date" : t_parts[0],
                        "type" : t_parts[1],
-                       "ammount" : float(t_parts[2])
+                       "ammount" : float(t_parts[2]),
                        "Balance" : float(t_parts[3])
                     })
         return account
@@ -83,8 +83,8 @@ class Bank:
         self.db_files = db_files
         self.account = {}
         self.last_account_number = 125101158000
-        self.load_data()
-        print(f"welcome to {self.bank_name} Bank!")
+        self._load_data()
+        print(f"welcome to {self.bank_name} ")
 
     def _load_data(self):
         if not os.path.exists(self.db_files):
